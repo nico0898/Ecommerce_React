@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from '../logo.svg';
-import { CartWidget } from '../components/cartWidget';
+import logo from '../../logo.svg';
+import { CartWidget } from '../cartWidget';
 
 export const NavBar = () => {
     return (
@@ -25,8 +25,4 @@ export const NavBar = () => {
             </div>
         </nav>
     );
-}
-
-function ItemListContainer (){
-    //contador de items
 }
