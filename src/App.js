@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import './App.css';
 import { NavBar } from './components/navbar'
-import { Item } from './components/item'
+import { ItemListContainer } from './components/itemListContainer';
 
 function App() {
   return (
@@ -23,7 +23,8 @@ function App() {
       </header> */}
       <NavBar/>
 
-      <Item initial="0" stock="5"/>
+      <ItemListContainer/>
+      
     </div>
   );
 }
