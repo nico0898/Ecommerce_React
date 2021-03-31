@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ItemList } from "../itemList";
+import { useParams } from "react-router-dom";
 
 export const ItemListContainer = () => {
     const [items, setItems] = useState([])
+
+    const {categoryId} = useParams()
 
     useEffect(()=>{
   
@@ -24,6 +27,7 @@ export const ItemListContainer = () => {
 
     return(
         <div className="container mt-3">
+        Items de la categoria {categoryId}
             <ItemList items={items}/>
         </div>
     );
