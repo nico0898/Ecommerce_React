@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import './App.css';
-import { NavBar } from './components/navbar'
+import { NavBar } from './components/navbar';
 import { ItemListContainer } from './components/itemListContainer';
+import  ItemDetailContainer from './components/itemDetailContainer'
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
       <NavBar/>
 
       <ItemListContainer/>
+
+      <ItemDetailContainer/>
       
     </div>
   );
