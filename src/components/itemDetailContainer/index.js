@@ -9,7 +9,6 @@ const getItems = (id) => { /* Esta función debe retornar la promesa que resuelv
             price: 1000,
             description: "Description" + id,
             img:""
-
         })},2000)
     })
 }

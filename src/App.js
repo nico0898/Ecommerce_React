@@ -19,17 +19,18 @@ function App() {
             Hola
           </Route>
 
-          <Route  path='/category/:categoryId'>
+          <Route path='/category/:categoryId'>
               <ItemListContainer />
           </Route>
 
-          <Route path='/item/:itemId/:otroId' >
+          {/* <Route path='/item/:itemId/:otroId' > */}
+          <Route path='/item/:itemId' >
               <ItemDetailContainer />
           </Route>
 
-          <Route path='*' >
+          {/* <Route path='*' >
             404
-          </Route>
+          </Route> */}
         </Switch>
       </div>
     </BrowserRouter>

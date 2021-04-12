@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
-export function ItemCount({ stock, initial }) {
+export function ItemCount({ stock, initial, onAdd }) {
 
   const [count, setCount] = useState(parseInt(initial));
 
@@ -19,7 +19,12 @@ export function ItemCount({ stock, initial }) {
       setCount(count - 1);
   };
 
+  const agregar = () => {
+    onAdd(count)
+  };
+
   return (
+      <div>
         <div className="d-flex flex-row justify-content-around">
             <button type="button" className="btn btn-outline-primary" disabled={count === 0} onClick={removeHandle}>
                 <FontAwesomeIcon icon={ faMinus }/>
@@ -31,6 +36,9 @@ export function ItemCount({ stock, initial }) {
                 <FontAwesomeIcon icon={ faPlus } />
             </button>
         </div>
+
+        <button className="btn btn-primary mt-3" onClick={ agregar }>Agregar a carrito</button>
+      </div>
   );
 }
 
