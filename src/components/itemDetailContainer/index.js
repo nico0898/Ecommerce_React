@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import ItemDetail from '../itemDetail';
+import React, {useState, useEffect} from 'react'
+import ItemDetail from '../itemDetail'
 import { useParams } from "react-router-dom";
 
+import {getFirestore} from '../../firebase';
+
+
 const getItems = (id) => { /* Esta función debe retornar la promesa que resuelva con delay */ 
-    return new Promise((resolve)=>{
-        setTimeout(()=>{resolve({
-            title:"Title",
-            price: 1000,
-            description: "Description" + id,
-            img:""
-        })},2000)
-    })
+    const db = getFirestore();
+    const itemsCollection = db.collection('items')
+    
+    const item = itemsCollection.doc(id) 
+    return item.get();
 }
 
 export default function ItemDetailContainer() {
@@ -18,14 +18,20 @@ export default function ItemDetailContainer() {
     const {itemId, otroId} = useParams()
 
     useEffect(() => {
-        getItems(itemId).then((res)=> setItem(res))
+        getItems(itemId)
+        .then((res)=> {
+            console.log('existe?', res.exists);
+            if (res.exists){
+                setItem({id:res.id, ...res.data()})
+            }
+        })
         return;
     }, [itemId])
 
     // Implementar mock invocando a getItems() y utilizando el resolver then
-    return <> {itemId} - {otroId}
-    <ItemDetail item={item} /></>/* JSX que devuelva un ItemDetail (desafío 6b) */
-}
+     return <> {itemId} - {otroId}
+     <ItemDetail item={item} /></>/* JSX que devuelva un ItemDetail (desafío 6b) */
+    }
 
 
 
