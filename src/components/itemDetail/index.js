@@ -10,33 +10,33 @@ export default function ItemDetail({ item }) {
     const {addItem} = useContext(CartContext);
 
     const addHandler = (contador)=>{
-        console.log('se agrego un item', contador)
+        console.log('se agrego un item', contador, item)
         addItem(item, contador)
         setCount(contador)
     }
 
     if (!item) return null;
 
-    return <div>
-            <img src={item?.img} alt=""/>
+    return <div className="d-flex flex-row">
+        <div>
+            <img src={item?.pictureUrl} alt=""/>
+        </div>
+        <div>
             <h2>{item?.title}</h2>
             <p>{item?.description}</p>
             <div>${item?.price}</div>
-            
+                
             <div style={{display:'flex', justifyContent:'center'}}>
-            { count === 0  ?
-                    <ItemCount stock="6" initial="2" onAdd={addHandler} />
-                        :
-                        <Link to='/cart' >
-                            <button >Terminar mi compra</button>
-                        </Link> 
-
-            }
+                { count === 0  ?
+                    <ItemCount stock="5" initial="0" onAdd={addHandler} />
+                    :
+                    <Link to='/cart' >
+                        <button className="btn btn-primary">Terminar mi compra</button>
+                    </Link>
+                }
             </div>
-            
-            
-
-  </div>;
+        </div>
+    </div>;
    
   }
 

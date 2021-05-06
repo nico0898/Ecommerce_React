@@ -8,6 +8,7 @@ import ItemDetailContainer from "./components/itemDetailContainer";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { CartProvider } from "./context/cartContext"
 import { Cart } from './components/cart';
+import { FormOrder } from './components/formOrder';
 
 
 function App() {
@@ -22,20 +23,21 @@ function App() {
             Hola
           </Route>
 
-          <Route  path='/category/:categoryId'>
+          <Route path='/productos'>
               <ItemListContainer />
           </Route>
-
 
           <Route path='/item/:itemId' >
               <ItemDetailContainer />
           </Route>
 
           <Route path="/cart">
-              <h2>Estoy en el Cart</h2>
               <Cart />
-            </Route>
+          </Route>
 
+          <Route path="/orders">
+              <FormOrder />
+          </Route>
         </Switch>
       </div>
     </BrowserRouter>

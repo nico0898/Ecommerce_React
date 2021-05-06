@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {ItemList} from "../itemList"
-
 import { useParams } from "react-router-dom";
-
 import {getFirestore} from '../../firebase';
-
 
 export default function ItemListContainer() {
   const [items, setItems] = useState([])
@@ -43,10 +40,9 @@ export default function ItemListContainer() {
   },[categoryId])
 
   return (
-    <div className="container ">
-      Items de la categoria {categoryId}
+    <div className="container">
+      {/* Items de la categoria {categoryId} */}
       <ItemList items={items}/>
-     
     </div>
   );
 }

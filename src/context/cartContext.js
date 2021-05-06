@@ -1,51 +1,51 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 
 export const CartContext = React.createContext([])
 
 export const CartProvider = ({children}) => {
-    // array con items de este forma   {item:item, quantity: number}
-    const [cart,setCart] = useState([])
-    const [totalItems,setTotalItems] = useState(0);
-    const [totalPrecio,setTotalPrecio] = useState(0)
+    // array con items de este forma   {producto:item, quantity: number}
+    const [cart, setCart] = useState([])
+    const [totalItems, setTotalItems] = useState(0);
+    const [totalPrecio, setTotalPrecio] = useState(0)
 
     useEffect(()=>{
 
         let totItems = 0;
         let precio = 0;
 
-        for(let cartItem of cart) {
-            totItems += cartItem.quantity;
-            precio += cartItem.quantity * cartItem.item.price;
+        for(let item of cart) {
+            totItems += item.cantidad;
+            precio += item.cantidad * item.producto.price;
         }
 
         setTotalItems(totItems);
         setTotalPrecio(precio)
 
     },[cart])
-    
 
-    const addItem = (newItem, newQuantity)=>{
+    const addItem = (item, cantidad)=>{
 
-        const prevCartItem = cart.find(e=> e.item.id === newItem.id)
+        //si el producto ya existe en el array entonces dara true por lo contrario dara false
+        const findItemCartArray = cart.find(e=> e.producto.id === item.id)
 
-        let newCart;
-        let qty;
-        if (prevCartItem){
-            newCart = cart.filter(e => e.item.id !== newItem.id)
-            qty = prevCartItem.quantity + newQuantity;
+        let nuevoProducto;
+        let cantidadProducto;
+
+        if (findItemCartArray){
+            nuevoProducto = cart.filter(e => e.producto.id !== item.id)
+            cantidadProducto = findItemCartArray.cantidad + cantidad; //se suma la cantidad tota de los productos
         }else{
-            newCart = [...cart]
-            qty =  newQuantity;
+            nuevoProducto = [...cart]
+            cantidadProducto = cantidad;
         }
 
-        setCart([...newCart, 
-                { item: newItem , quantity: qty  }])
+        setCart([...nuevoProducto, { producto: item , cantidad: cantidadProducto  }])
         
     } // agregar cierta cantidad de un ítem al carrito
 
 
     const removeItem = (itemId) =>{
-        const newCart = cart.filter(e => e.item.id !== itemId)
+        const newCart = cart.filter(e => e.producto.id !== itemId)
         setCart(newCart)
     }// Remover un item del cart por usando su id
     
@@ -54,16 +54,14 @@ export const CartProvider = ({children}) => {
     } // Remover todos los items
     
     const isInCart = (id) =>{
-        const currentItem = cart.find(e=> e.item.id === id)
+        const currentItem = cart.find(e=> e.producto.id === id)
 
         return currentItem ? true : false
     } 
 
-
-
     return (
-    <CartContext.Provider value={{cart,addItem,removeItem,clear,isInCart, totalItems,totalPrecio}} >
-        {children}
-    </CartContext.Provider>
+        <CartContext.Provider value={{ cart, addItem, removeItem, clear, isInCart, totalItems, totalPrecio}} >
+            {children}
+        </CartContext.Provider>
     )
 }
