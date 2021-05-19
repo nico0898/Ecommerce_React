@@ -28,7 +28,7 @@ export default function ItemDetail({ item }) {
                 
             <div style={{display:'flex', justifyContent:'center'}}>
                 { count === 0  ?
-                    <ItemCount stock="5" initial="0" onAdd={addHandler} />
+                    <ItemCount stock={item.stock === 0 ? 0 : item.stock} initial="0" onAdd={addHandler} />
                     :
                     <Link to='/cart' >
                         <button className="btn btn-primary">Terminar mi compra</button>

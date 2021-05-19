@@ -17,8 +17,18 @@ export const NavBar = () => {
                 <div className="col-md-7 m-auto">
                     <ul className="d-flex flex-row justify-content-around list-unstyled text-white align-items-center mb-0">
                         <li>
-                            <NavLink to={`/productos`} className="nav-item nav-link text-white" >
+                            <NavLink to={`/productos/todos`} className="nav-item nav-link text-white" >
                                 Productos
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={`/productos/monitor`} className="nav-item nav-link text-white" >
+                                Monitores
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={`/productos/procesador`} className="nav-item nav-link text-white" >
+                                Procesadores
                             </NavLink>
                         </li>
                     </ul>

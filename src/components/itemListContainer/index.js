@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
-import {ItemList} from "../itemList"
+import { ItemList } from "../itemList"
 import { useParams } from "react-router-dom";
-import {getFirestore} from '../../firebase';
+import { getFirestore } from '../../firebase';
 
 export default function ItemListContainer() {
   const [items, setItems] = useState([])
 
-  const {categoryId} = useParams()
+  const {categoria} = useParams()
 
   useEffect(()=>{
 
     const db = getFirestore();
-    const itemsCollection = db.collection('items') 
-    const prom = itemsCollection.get()
-    // const filtrado = itemsCollection
-    //    .where('categoria','==', categoryId).limit(2)
+    const itemsCollection = db.collection('items');
+    let prom = itemsCollection.get();
 
-    // const prom =  filtrado.get();
+    if(categoria !== "todos")
+      prom = itemsCollection.where('categoria','==', categoria).get();
+    else
+      prom = itemsCollection.get();
+    
 
-
-    prom.then((resultado)=>{
+    prom.then((resultado) => {
       console.log('se consultaron los datos');
       console.log(resultado);
 
@@ -28,20 +29,19 @@ export default function ItemListContainer() {
 
         console.log(resultado.docs.map(doc => doc.id))
 
-
         setItems(resultado.docs.map(doc => {
-          return {id:doc.id,  ...doc.data()}
-        }
-          ))
+            return {id:doc.id,  ...doc.data()}
+        }))
       }
-      //setItems(resultado)
-    })
+      
+    }
+  )},[categoria])
 
-  },[categoryId])
+  console.log(items)
 
   return (
     <div className="container">
-      {/* Items de la categoria {categoryId} */}
+      {/* Items de la categoria {categoria} */}
       <ItemList items={items}/>
     </div>
   );

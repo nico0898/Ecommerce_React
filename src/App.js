@@ -23,7 +23,7 @@ function App() {
             Hola
           </Route>
 
-          <Route path='/productos'>
+          <Route path='/productos/:categoria'>
               <ItemListContainer />
           </Route>
 
